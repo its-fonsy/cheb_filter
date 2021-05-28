@@ -1,24 +1,31 @@
 #/usr/bin/env python3
 
 import math
-from prettytable import PrettyTable
+import sys
 import design_filter
 
-# Specs
-A_max = 1
-A_min = 20
+# Getting the specs
+if len(sys.argv) < 6:
+    print(f"  Usage: python {sys.argv[0]} Amax Amin fp fs G")
+    print(f"  example: \n       python {sys.argv[0]} 2 28 15000 20000 5")
+    sys.exit()
 
-fp = 15e3
-fs = 20e3
+A_max = int(sys.argv[1])
+A_min = int(sys.argv[2])
 
-G = 5
+fp = int(sys.argv[3])
+fs = int(sys.argv[4])
+
+G = int(sys.argv[5])
 
 # print specs
 print("\n  Specs")
 print("  =====")
-spec_table = PrettyTable(["Amax", "Amin", "fp", "fs", "G"])
-spec_table.add_row([A_max, A_min, fp, fs, G])
-print(spec_table)
+print(f"  Amax = {A_max}")
+print(f"  Amin = {A_min}")
+print(f"  fp = {fp}")
+print(f"  fp = {fs}")
+print(f"  G = {G}")
 
 print("\n  Calculate the order of the filter")
 print("  ===================================")
@@ -50,7 +57,6 @@ print("\n  Transfer Function")
 print("  =================")
 
 tf_poles = []
-
 
 # print the ratio line of the right dimension
 # fixed 27 chars to write a second order pole
@@ -95,11 +101,12 @@ for pole in tf_poles:
         Q = w / (pole[0] * 2 * math.pi * fp)
         filter_specs.append([w, Q])
 
-filt_table = PrettyTable(["w [rad/s]", "Q"])
 for spec in filter_specs:
-    filt_table.add_row([int(spec[0]), spec[1]])
-filt_table.sortby = "Q"
-print(filt_table)
+    w, q = spec
+    if q == 0:
+        print(f"  w = {int(w)}")
+    else:
+        print(f"  w = {int(w)} with a Q = {format(q, '.4f')} ")
 
 print("\n  Sallen and Key filters")
 print("  ======================")
