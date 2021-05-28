@@ -76,7 +76,7 @@ def sallen_key(w, q):
         c2 = c * q**2 * 4
         near_c2, diff = near_commercial(c2)
         r = 1 / (w * math.sqrt(c * c2))
-        if diff < best_diff :
+        if (diff < best_diff) and (r < 1e6) :
             best_c1 = c 
             best_c2 = near_c2 
             exact_c2 = c2
