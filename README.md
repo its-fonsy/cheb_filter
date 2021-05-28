@@ -7,6 +7,10 @@ With `python3` already installed
 
 	git clone https://github.com/its-fonsy/cheb_filter.git
 	cd cheb_filter
+
+To work correctly the script need `Amax Amin fp fs G` (in this order) as
+parameter when lunch. So an example of correct use would be
+
 	python -B cheb.py 1 20 15000 20000 5
 
 the `-B` flag is for preventing python to generate the folder `__pycache__`.
@@ -96,6 +100,18 @@ An example of the output would be
   R1 = 10000 ohm
   R2 = 50000 ohm
 ```
+
+## Components for Sallen-Key filter
+Using the *smart* strategy when designing the filter the algorithm try to use
+two capacitance of commercial value. The resistor is calculated from those
+value.
+
+
+## Components for Tow-Thomas filter
+The algorithm calculate all the value of both resistance for each commercial
+capacitor. Then it display the one with nearest value, for both resistance, the
+commercial one.
+
 
 ## Circuits reference 
 TO BE DONE
