@@ -148,3 +148,11 @@ if N % 2:
             print(f"     C = {c} F")
             print(f"    R1 = {int(r1)} ohm")
             print(f"    R2 = {int(r2)} ohm\n")
+else:
+    print("  Resistance to set the G")
+    print("  =======================")
+    r1 = 10e3
+    r2 = r1 * G
+    print(f"  Opamp in inverting amplifier configuration")
+    print(f"  R1 = {int(r1)} ohm")
+    print(f"  R2 = {int(r2)} ohm\n")
